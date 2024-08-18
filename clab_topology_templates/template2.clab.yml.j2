@@ -1,0 +1,28 @@
+
+---
+name: {{ topology.name|slugify }}-SECOND TEMPLATE IN REPO
+{% if mgmt_network or mgmt_subnet %}
+mgmt:
+  {% if mgmt_network %}network: {{ mgmt_network }}{% endif %}
+  {% if mgmt_subnet %}ipv4-subnet: {{ mgmt_subnet }}{% endif %}
+{% endif %}
+topology:
+  kinds:
+    {%- for kind in kinds %}
+    {{ kind.kind }}:
+      image: {{ kind.image }}
+    {%- endfor %}
+  nodes:
+    {%- for member in members %}
+    {{ member.obj.name }}:
+      kind: {{ member.kind.kind }}
+    {%- for key, value in member.node_extras.items() %}
+      {{ key }}: {{ value }}
+    {%- endfor %}
+    {%- endfor %}
+  {% if topology.get_member_cables() %}
+  links:
+    {%- for cable in topology.get_member_cables() %}
+    - endpoints: ["{{ cable.termination_a.device.name }}:{{cable.termination_a.name}}", "{{ cable.termination_b.device.name }}:{{cable.termination_b.name}}"]
+    {%- endfor %}
+  {% endif %}
