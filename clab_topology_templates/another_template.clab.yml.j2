@@ -1,6 +1,6 @@
 
 ---
-name: {{ topology.name|slugify }}_ADDED FROM GIT REPO!
+name: {{ topology.name|slugify }}_GITSOURCE
 {% if mgmt_network or mgmt_subnet %}
 mgmt:
   {% if mgmt_network %}network: {{ mgmt_network }}{% endif %}
