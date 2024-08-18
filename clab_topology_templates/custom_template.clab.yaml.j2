@@ -1,7 +1,6 @@
 
 ---
-name: {{ topology.name|slugify }}
-TEMPLATE CONTENT SOURCED FROM GIT REPO!
+name: {{ topology.name|slugify }}-FROM GIT REPO!
 {% if mgmt_network or mgmt_subnet %}
 mgmt:
   {% if mgmt_network %}network: {{ mgmt_network }}{% endif %}
