@@ -1,6 +1,6 @@
 
 ---
-name: {{ topology.name|slugify }}_from_git_repo
+name: {{ topology.name|slugify }}-from-git-repo
 {% if mgmt_network or mgmt_subnet %}
 mgmt:
   {% if mgmt_network %}network: {{ mgmt_network }}{% endif %}
